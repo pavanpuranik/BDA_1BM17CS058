@@ -1,0 +1,29 @@
+use company
+
+db.Department.insert({id:1, Name:"x"})
+db.Department.update({id:2, Name:"y", dept_id:567},{$set:{dept_id:567}},{upsert:true})
+db.Department.insert({id:3, Name:"ABC", dept_id:12})
+db.Department.insert({id:4, Name:"ANB", dept_id:13})
+db.Department.insert({id:5, Name:"djdj", dept_id:23})
+db.Department.save( {id:6, Name: "ASD" } )
+
+
+db.Employee.insert({id:10, Name:"ABCD",dept_id:101,age:31})
+db.Employee.insert({id:11, Name:"Asdf",dept_id:450,age:29})
+db.Employee.insert({id:12, Name:"gfg",dept_id:500,age:21})
+db.Employee.insert({id:13, Name:"trt",dept_id:200,age:40})
+db.Employee.insert({id:14, Name:"vfv",dept_id:900,age:50})
+
+
+db.Department.update({"Name": "djdj"},{ $unset: {"dept_id": ""}})
+
+db.Department.find()
+db.Employee.find()
+
+db.Department.remove({'name':'ABC'})
+db.Department.remove({'name':'XYZ'})
+db.Department.remove({'Name':'y'})
+
+db.Employee.find({  dept_id :{$gt: 100, $lt: 400}}, {Name:1, dept_id:1}).pretty()
+db.Employee.find({Name:/A/}).pretty()
+db.Employee.find({age : {$gt :29}}).pretty()
